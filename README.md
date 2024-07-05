@@ -1,40 +1,43 @@
-Below are the steps to get your plugin running. You can also find instructions at:
+# Dovetail Tag Import
 
-  https://www.figma.com/plugin-docs/plugin-quickstart-guide/
+This plugin allows you to import Tags from a Dovetail Tag board to Figjam. 
+![Dovetail tag board and Figjam](./screenshots/screenshot.png)
 
-This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
+## Setup
 
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
+### Setup tag component
+- Open this Figma File and save it to your Project
+- Open the _Libraries_ Panel and publish the components as Library
+- Open the Figma console (Fimga Icon > Plugins > Development > Show/Hide console)
+  - enter `allow pasting` and hit Enter
+  - paste `figma.currentPage.selection[0].key` and hit Enter
+  - copy the component key
+- Open
 
-  https://nodejs.org/en/download/
+### Install Plugin
+- Clone this repository
+- Open the file `src/tagComponent.ts`
+  - replace the value of `TAG_COMPONENT_KEY` with the component key you copied in previous step
+- Run `npm setup`
+- Open the Figma desktop app. Select the Figma icon in the top left corner. Go to: 
+  - `Plugins > Development > Import plugin from manifest`
+  - Select the `manifest.json` of this plugin
 
-Next, install TypeScript using the command:
+## Run the Plugin
+- Open the _Plugins_ panel and switch from _Recents and saved_ to _Development_
+- Run the _Dovetail Tag Import_ plugin
+- Enter the data (see below) and hit _Import_
 
-  npm install -g typescript
-
-Finally, in the directory of your plugin, get the latest type definitions for the plugin API by running:
-
-  npm install --save-dev @figma/plugin-typings
-
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
-
-TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
-
-For more information, visit https://www.typescriptlang.org/
-
-Using TypeScript requires a compiler to convert TypeScript (code.ts) into JavaScript (code.js)
-for the browser to run.
-
-We recommend writing TypeScript code using Visual Studio code:
-
-1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-    then select "npm: watch". You will have to do this again every time
-    you reopen Visual Studio Code.
-
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+### How to get to the data
+- Open the _Network_ tab in the Chrome dev tools
+- Open your Dovetail Project and the tag board from which you want to import the tags
+- Search for a `graphql` request with this payload: 
+  ```
+  {
+  "operationName": "ProjectTagsPageQuery",
+    ...
+  }
+  ```
+- right click on the request and select `Copy > Copy response`
+- Paste this response in the Plugin's text area
+- Copy the url of your Dovetail Project, e.g. `https://my-project.dovetail.com` and enter this url in the Plugin's textfield
