@@ -6,11 +6,11 @@ This plugin allows you to import Tags from a Dovetail Tag board to Figjam.
 ## Setup
 
 ### Setup tag component
-- Open this Figma File and save it to your Project
+- Open [this Figma File](https://www.figma.com/design/tnMi877GykO8pPNAJbdPls/Dovetail-Tags?node-id=1-4&t=SEhRDwFFP09IDL6O-1) and save it to your Project
 - Open the _Libraries_ Panel and publish the components as Library
 - Open the Figma console (Fimga Icon > Plugins > Development > Show/Hide console)
-  - enter `allow pasting` and hit Enter
-  - paste `figma.currentPage.selection[0].key` and hit Enter
+  - run `allow pasting` 
+  - run `figma.currentPage.selection[0].key`
   - copy the component key
 - Open
 
