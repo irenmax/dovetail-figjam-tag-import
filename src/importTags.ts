@@ -3,21 +3,14 @@ import { createTagNode } from "./createTagNode";
 import { getTagGroups } from "./getTagGroups";
 import { getTags } from "./getTags";
 import { ProjectTagsQueryResponse } from "./types";
-
-export const initComponents = async () => {
-  const tagComponent = await figma.importComponentByKeyAsync(
-    "54b42eafcbb46533da89d4593762d94ec25067e9"
-  );
-  await figma.loadFontAsync({ family: "Inter", style: "Medium" });
-  return tagComponent;
-};
+import { initComponent } from "./tagComponent";
 
 export const importTags = async (
   data: ProjectTagsQueryResponse,
   projectUrl: string
 ) => {
   const nodes: SceneNode[] = [];
-  const tagComponent = await initComponents();
+  const tagComponent = await initComponent();
 
   if (!data) {
     figma.notify("No data found.");
